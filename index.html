@@ -3,245 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuMail | Secure Communications</title>
+    <title>QuMail | Secure Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #020617; font-family: 'Inter', sans-serif; color: #f8fafc; overflow-x: hidden; }
+        body { background-color: #020617; font-family: 'Inter', sans-serif; color: #f8fafc; }
         .mono { font-family: 'JetBrains Mono', monospace; }
+        .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
         
-        /* High-Tech Card Hover */
-        .glass-card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .interactive-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(99, 102, 241, 0.4);
-            background-color: rgba(30, 41, 59, 0.6);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
-        }
-
-        /* Entropy & Scanning Animations */
-        @keyframes scan { 0% { left: -100%; } 100% { left: 100%; } }
-        .scan-overlay {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-            animation: scan 4s infinite linear;
+        /* Grid Area Reordering for Mobile */
+        .main-grid { display: grid; gap: 1.5rem; grid-template-areas: "hero" "download" "integrity" "audit" "network" "features"; }
+        
+        @media (min-width: 1024px) {
+            .main-grid {
+                grid-template-columns: repeat(12, 1fr);
+                grid-template-areas: 
+                    "hero hero hero hero hero hero hero hero audit audit audit audit"
+                    "hero hero hero hero hero hero hero hero integrity integrity integrity integrity"
+                    "features features features features features features features features network network network network";
+            }
         }
 
-        /* Network Traffic Pulse */
-        @keyframes flow { 0% { transform: translateX(-100%); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateX(400%); opacity: 0; } }
-        .pulse {
-            position: absolute; top: 0; left: 0; bottom: 0; width: 80px;
-            background: linear-gradient(90deg, transparent, #10b981, transparent);
-            animation: flow 3s infinite ease-in-out;
-        }
+        .area-hero { grid-area: hero; }
+        .area-audit { grid-area: audit; }
+        .area-integrity { grid-area: integrity; }
+        .area-network { grid-area: network; }
+        .area-features { grid-area: features; }
 
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
+        @keyframes scan { 0% { top: -100%; } 100% { top: 100%; } }
+        .scanner { position: absolute; width: 100%; height: 20%; background: linear-gradient(to bottom, transparent, rgba(99, 102, 241, 0.1), transparent); animation: scan 4s infinite linear; pointer-events: none; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen p-4 md:p-12 flex items-center justify-center">
 
-    <nav class="w-full border-b border-white/5 px-8 py-5 flex justify-between items-center bg-slate-950/50 backdrop-blur-xl sticky top-0 z-50">
-        <div class="flex items-center gap-3">
-            <div class="w-9 h-9 bg-indigo-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">Q</div>
-            <span class="font-extrabold tracking-tighter text-2xl uppercase italic">QuMail <span class="text-indigo-500 not-italic font-light">Protocol</span></span>
-        </div>
-        <div class="hidden md:flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.2em]">
-            <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="text-slate-400">Node: Active</span>
-            </div>
-            <span class="text-slate-600">Secure Cloud Relay v2.0</span>
-        </div>
-    </nav>
-
-    <main class="flex-1 max-w-7xl w-full mx-auto p-6 md:p-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="max-w-7xl w-full main-grid">
         
-        <section class="lg:col-span-2 space-y-8">
-            <div class="glass-card interactive-card rounded-3xl p-10 relative overflow-hidden">
-                <div class="scan-overlay"></div>
-                
-                <div class="flex justify-between items-start mb-8">
-                    <div>
-                        <h2 class="text-4xl font-black mb-3 tracking-tight">QuMail Terminal</h2>
-                        <p class="text-slate-400 max-w-lg text-base leading-relaxed">
-                            Secured messaging node featuring decoupled key-path routing and multi-tier quantum entropy encryption.
-                        </p>
+        <section class="area-hero glass rounded-3xl p-6 md:p-10 relative overflow-hidden">
+            <div class="scanner"></div>
+            <div class="flex flex-col md:flex-row justify-between items-start mb-8 md:mb-12 gap-4">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center font-bold text-white">Q</div>
+                        <h1 class="text-3xl md:text-4xl font-black tracking-tighter uppercase italic">QuMail <span class="text-indigo-500 not-italic font-light">Terminal</span></h1>
                     </div>
-                    <div class="px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-black rounded-full uppercase">Stable Prod-2026</div>
+                    <p class="text-slate-400 max-w-lg text-sm md:text-lg leading-relaxed">
+                        Secured messaging node featuring decoupled key-path routing and multi-tier quantum entropy encryption.
+                    </p>
                 </div>
-                
-                <div class="flex flex-wrap gap-4 mb-10">
-                    <a href="QuMailSetup.zip" download 
-                       class="bg-indigo-600 hover:bg-indigo-500 text-white px-10 py-4 rounded-xl font-bold transition-all flex items-center gap-3 shadow-xl shadow-indigo-900/40 hover:-translate-y-1">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                        Download App (Windows)
-                    </a>
-                    <button id="docs-btn" class="bg-white/5 border border-white/10 px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all text-slate-300">
-                        User Manual
-                    </button>
-                    <button id="verify-btn" class="bg-emerald-500/10 border border-emerald-500/20 px-8 py-4 rounded-xl font-bold hover:bg-emerald-500/20 transition-all text-emerald-400">
-                        Verify Integrity
-                    </button>
-                </div>
-
-                <div class="bg-black/40 border border-white/5 rounded-2xl p-6 mb-8">
-                    <div class="flex items-center justify-between mb-3">
-                        <p class="text-[10px] uppercase tracking-[0.3em] text-indigo-400 font-black">Build Integrity (SHA-256)</p>
-                        <span class="text-[9px] text-slate-500 mono">Match: 100% Reliable</span>
-                    </div>
-                    <code id="hash-string" class="mono text-[11px] text-slate-300 break-all block leading-relaxed">
-                        9BBA5717A651C00A239B4ACBFB3D3E87D882B41457FF6317BEB36BCA92E9C7F2
-                    </code>
-                </div>
-
-                <div class="grid grid-cols-2 gap-8 border-t border-white/5 pt-8">
-                    <div>
-                        <p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Architecture</p>
-                        <p class="mono text-xs text-indigo-300">Decoupled Key-Payload</p>
-                    </div>
-                    <div>
-                        <p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Verification</p>
-                        <p class="mono text-xs text-emerald-400">Information-Theoretic Security</p>
-                    </div>
-                </div>
+                <div class="bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[9px] font-black px-4 py-2 rounded-full tracking-widest uppercase">v2.0.0 Stable</div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-card p-8 rounded-2xl border border-white/5">
-                    <div class="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center mb-6 border border-indigo-500/20 text-indigo-400">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                    </div>
-                    <h4 class="font-black mb-3 text-white uppercase text-xs tracking-widest">Zero-Knowledge Path</h4>
-                    <p class="text-sm text-slate-400 leading-relaxed">No data ever leaves your machine unencrypted. Keys and payloads remain decoupled to ensure zero exposure.</p>
-                </div>
-                <div class="glass-card p-8 rounded-2xl border border-white/5">
-                    <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-6 border border-emerald-500/20 text-emerald-400">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    </div>
-                    <h4 class="font-black mb-3 text-white uppercase text-xs tracking-widest">Ephemeral Memory</h4>
-                    <p class="text-sm text-slate-400 leading-relaxed">All session logs and volatile keys are physically scrubbed from RAM immediately upon termination via ZeroMemory.</p>
-                </div>
+            <div class="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+                <a href="QuMailSetup.zip" download class="bg-indigo-600 text-center text-white px-8 py-4 rounded-2xl font-bold shadow-2xl shadow-indigo-900/40 hover:-translate-y-1 transition-all">Download App</a>
+                <button id="verify-btn" class="bg-emerald-500/10 border border-emerald-500/20 px-8 py-4 rounded-2xl font-bold text-emerald-400 text-sm">Verify Integrity</button>
             </div>
         </section>
 
-        <aside class="space-y-8">
-            <div class="bg-slate-950 border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
-                <div class="bg-slate-900/50 px-6 py-4 border-b border-white/5 flex justify-between items-center">
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Security Audit</span>
-                    <span class="text-[9px] mono text-indigo-400 animate-pulse">LIVE_MONITOR</span>
-                </div>
-                <div class="p-6 mono space-y-8">
-                    <div>
-                        <div class="flex justify-between items-end mb-3">
-                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-tighter">KMS Entropy Stream</p>
-                            <p id="entropy-val" class="text-indigo-400 text-xs font-bold">7.8876 b/B</p>
-                        </div>
-                        <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden relative">
-                            <div id="entropy-bar" class="bg-indigo-600 h-full w-[94%] transition-all duration-700 relative">
-                                <div class="scan-overlay"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="terminal-log" class="bg-black/60 p-4 rounded-xl border border-white/5 text-[10px] min-h-[140px] flex flex-col justify-end space-y-2 overflow-hidden">
-                        <p class="text-slate-600 italic">// Handshake established</p>
-                        <p class="text-emerald-500 font-bold">● Secure Relay Active</p>
-                    </div>
-                </div>
+        <aside class="area-audit glass rounded-3xl overflow-hidden shadow-2xl">
+            <div class="bg-slate-900/50 px-6 py-4 border-b border-white/5 flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <span>Security Audit</span>
+                <span class="text-indigo-400 animate-pulse">LIVE</span>
             </div>
-
-            <div class="glass-card p-6 rounded-3xl border border-white/5">
-                <h5 class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-6 flex justify-between items-center">
-                    <span>Network Activity</span>
-                    <span class="text-emerald-500 text-[8px]">ACTIVE_RELAY</span>
-                </h5>
-                <div class="space-y-6">
-                    <div class="flex justify-between items-center text-[10px] mono">
-                        <span class="text-slate-400">Relay_Node_01</span>
-                        <span class="text-emerald-500 font-bold tracking-tighter">SECURE</span>
-                    </div>
-                    <div class="relative h-1.5 bg-slate-800/50 rounded-full overflow-hidden w-full">
-                        <div class="pulse"></div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
-                        <div class="text-[9px] mono text-slate-500 space-y-1">
-                            <p>LATENCY: <span class="text-indigo-400">22ms</span></p>
-                            <p>UPTIME: <span class="text-indigo-400">99.9%</span></p>
-                        </div>
-                        <div class="text-[9px] mono text-slate-500 text-right space-y-1">
-                            <p>PACKETS: <span id="packet-count" class="text-indigo-400">1,024</span></p>
-                            <p>ENCRYPTION: <span class="text-emerald-500">AES-256</span></p>
-                        </div>
-                    </div>
+            <div class="p-5 space-y-4">
+                <div class="flex justify-between items-end">
+                    <p class="text-[9px] text-slate-500 uppercase font-bold">KMS Entropy</p>
+                    <p id="entropy-val" class="text-indigo-400 text-xs font-bold mono">7.8833 b/B</p>
+                </div>
+                <div class="w-full bg-slate-950 h-1.5 rounded-full overflow-hidden">
+                    <div id="entropy-bar" class="bg-indigo-600 h-full w-[94%] transition-all duration-700"></div>
+                </div>
+                <div id="terminal-log" class="bg-black/40 p-3 rounded-xl border border-white/5 mono text-[9px] space-y-1 min-h-[80px]">
+                    <p class="text-emerald-500 font-bold">● Connection Secure</p>
                 </div>
             </div>
         </aside>
-    </main>
 
-    <div id="docs-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6 bg-slate-950/90 backdrop-blur-xl">
-        <div class="bg-slate-900 border border-white/10 w-full max-w-2xl rounded-3xl shadow-3xl overflow-hidden flex flex-col">
-            <div class="px-8 py-6 border-b border-white/5 flex justify-between items-center">
-                <h3 class="text-xl font-black text-indigo-400 uppercase tracking-tight">System Manual</h3>
-                <button id="close-docs" class="text-slate-500 hover:text-white text-2xl">✕</button>
+        <div class="area-integrity glass rounded-3xl p-6 border border-emerald-500/20">
+            <div class="flex items-center gap-3 mb-4 text-[10px] font-black uppercase tracking-widest text-slate-300">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Build Integrity
             </div>
-            <div class="p-8 space-y-8 overflow-y-auto custom-scrollbar max-h-[60vh] text-sm text-slate-400">
-                <section>
-                    <h4 class="text-white font-bold mb-3 uppercase text-xs tracking-widest">01. Identity Setup</h4>
-                    <p>Activate **2-Step Verification** on your Google Account and generate a **16-digit App Password**. This is your secure bridge to the SMTP relay.</p>
-                </section>
-                <section>
-                    <h4 class="text-white font-bold mb-3 uppercase text-xs tracking-widest">02. Protocol Selection</h4>
-                    <p>Choose between Level 1 (OTP Perfect Secrecy) or Level 2 (Quantum AES-256) based on your required threat model.</p>
-                </section>
+            <code class="block bg-black/40 p-3 rounded-xl text-[9px] text-slate-400 break-all mono border border-white/5 mb-2">
+                9BBA5717A651C00A239B4ACBFB3D3E87D882B41457FF6317BEB36BCA92E9C7F2
+            </code>
+            <div class="flex justify-between text-[8px] font-bold text-emerald-500 uppercase mono">
+                <span>SHA-256</span>
+                <span>Verified Match</span>
             </div>
-            <div class="p-6 bg-slate-950/50 border-t border-white/5 flex justify-end">
-                <button id="close-docs-btn" class="bg-indigo-600 px-10 py-3 rounded-xl font-bold hover:bg-indigo-500 text-white transition-all">Understood</button>
+        </div>
+
+        <div class="area-features grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="glass p-6 rounded-3xl text-sm leading-relaxed text-slate-400">
+                <h4 class="text-indigo-400 text-[10px] font-black uppercase mb-2">Zero-Knowledge</h4>
+                Payloads and keys are strictly decoupled during transmission.
+            </div>
+            <div class="glass p-6 rounded-3xl text-sm leading-relaxed text-slate-400">
+                <h4 class="text-emerald-400 text-[10px] font-black uppercase mb-2">Ephemeral RAM</h4>
+                Deterministic memory scrubbing via ZeroMemory on exit.
+            </div>
+        </div>
+
+        <div class="area-network glass rounded-3xl p-6">
+            <div class="flex justify-between items-center mb-4 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                <span>Relay Activity</span>
+                <span class="text-emerald-500 text-[8px]">ACTIVE</span>
+            </div>
+            <div class="h-1 bg-slate-900 rounded-full overflow-hidden relative mb-4">
+                <div class="absolute h-full w-20 bg-indigo-500 blur-sm animate-[flow_2s_infinite]"></div>
+            </div>
+            <div class="flex justify-between text-[9px] mono text-slate-500">
+                <span>LATENCY: 24ms</span>
+                <span>UPTIME: 99.9%</span>
             </div>
         </div>
     </div>
 
-    <footer class="text-center p-12 border-t border-white/5 bg-slate-950/50">
-        <p class="text-slate-600 text-[10px] mono uppercase tracking-[0.4em]">QuMail Security Group &bull; 2026 Build</p>
-    </footer>
-
     <script>
-        // Modal Logic
-        const docsModal = document.getElementById('docs-modal');
-        document.getElementById('docs-btn').onclick = () => docsModal.classList.remove('hidden');
-        document.getElementById('close-docs').onclick = () => docsModal.classList.add('hidden');
-        document.getElementById('close-docs-btn').onclick = () => docsModal.classList.add('hidden');
-
-        // Integrity Verification
-        document.getElementById('verify-btn').onclick = function() {
-            const log = document.getElementById('terminal-log');
-            const hash = document.getElementById('hash-string').innerText.trim();
-            
-            this.innerText = "VERIFYING...";
-            this.classList.add('opacity-50');
-
-            setTimeout(() => {
-                const p = document.createElement('p');
-                p.className = "text-emerald-400 font-bold";
-                p.innerText = ">> INTEGRITY_SUCCESS: HASH_MATCHED";
-                log.appendChild(p);
-                this.innerText = "Verify Integrity";
-                this.classList.remove('opacity-50');
-            }, 1200);
-        };
-
-        // Live Simulation
-        let pkts = 1024;
         setInterval(() => {
             document.getElementById('entropy-val').innerText = (7.88 + Math.random() * 0.009).toFixed(4) + " b/B";
             document.getElementById('entropy-bar').style.width = (90 + Math.random() * 8) + "%";
-            pkts += Math.floor(Math.random() * 4);
-            document.getElementById('packet-count').innerText = pkts.toLocaleString();
-        }, 3000);
+        }, 2500);
     </script>
 </body>
 </html>
