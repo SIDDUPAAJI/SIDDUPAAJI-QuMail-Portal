@@ -11,11 +11,9 @@
         .mono { font-family: 'JetBrains Mono', monospace; }
         .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
         
-        /* Fixed Scanner Animation */
         @keyframes scan { 0% { top: -100%; } 100% { top: 100%; } }
         .scanner { position: absolute; width: 100%; height: 20%; background: linear-gradient(to bottom, transparent, rgba(99, 102, 241, 0.05), transparent); animation: scan 4s infinite linear; pointer-events: none; }
         
-        /* Flow Animation */
         @keyframes flow { 0% { transform: translateX(-100%); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateX(400%); opacity: 0; } }
         .pulse { position: absolute; top: 0; left: 0; bottom: 0; width: 80px; background: linear-gradient(90deg, transparent, #10b981, transparent); animation: flow 3s infinite ease-in-out; }
     </style>
@@ -42,7 +40,7 @@
                 </div>
 
                 <div class="flex flex-wrap gap-4 items-center">
-                    <a href="QuMailSetup.zip" download 
+                    <a href="https://github.com/SIDDUPAAJI/SIDDUPAAJI-QuMail-Portal/raw/main/QuMailSetup.zip" 
                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-10 py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-3 shadow-2xl shadow-indigo-900/40 hover:-translate-y-1">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         Download App
@@ -71,35 +69,36 @@
                 </div>
                 <div class="glass p-8 rounded-3xl">
                     <h4 class="text-emerald-400 text-[10px] font-black uppercase tracking-widest mb-4">Ephemeral RAM</h4>
-                    <p class="text-sm text-slate-400 leading-relaxed">Deterministic memory scrubbing overwrites session data immediately after processing.</p>
+                    <p class="text-sm text-slate-400 leading-relaxed">Deterministic memory scrubbing overwrites session data immediately.</p>
                 </div>
             </div>
         </section>
 
         <aside class="lg:col-span-4 space-y-6">
-            <div class="glass rounded-3xl overflow-hidden">
+            <div class="glass rounded-3xl overflow-hidden shadow-xl">
                 <div class="bg-slate-900/50 px-5 py-3 border-b border-white/5 flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-slate-400">
                     <span>Audit Feed</span>
-                    <span class="text-indigo-400 animate-pulse text-[9px]">LIVE</span>
+                    <span class="text-indigo-400 animate-pulse text-[9px]">LIVE MONITORING</span>
                 </div>
                 <div class="p-5 space-y-4">
                     <div class="flex justify-between items-end">
                         <p class="text-[9px] text-slate-500 uppercase font-bold">Entropy</p>
                         <p id="entropy-val" class="text-indigo-400 text-xs font-bold mono">7.8833 b/B</p>
                     </div>
-                    <div class="w-full bg-slate-950 h-1 rounded-full overflow-hidden">
+                    <div class="w-full bg-slate-950 h-1.5 rounded-full overflow-hidden">
                         <div id="entropy-bar" class="bg-indigo-600 h-full w-[94%] transition-all duration-700 relative"></div>
                     </div>
                     <div id="terminal-log" class="bg-black/40 p-3 rounded-xl border border-white/5 mono text-[9px] min-h-[60px] flex flex-col justify-end">
-                        <p class="text-emerald-500 font-bold">● Secure Relay Active</p>
+                        <p class="text-emerald-500 font-bold">● Connection Secure</p>
                     </div>
                 </div>
             </div>
 
-            <div class="glass rounded-3xl p-6 border border-emerald-500/20">
+            <div class="glass rounded-3xl p-6 border border-emerald-500/20 shadow-lg">
                 <div class="flex items-center gap-2 mb-4 text-[10px] font-black uppercase tracking-widest text-slate-300">
                     <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Build Integrity
                 </div>
+                <p class="text-[9px] text-slate-500 uppercase font-bold mb-2">SHA-256 Checksum</p>
                 <code class="block bg-black/50 p-4 rounded-xl text-[10px] text-slate-400 break-all mono border border-white/5 mb-4">
                     9BBA5717A651C00A239B4ACBFB3D3E87D882B41457FF6317BEB36BCA92E9C7F2
                 </code>
@@ -110,7 +109,7 @@
 
             <div class="glass rounded-3xl p-6">
                 <div class="flex justify-between items-center mb-4 text-[10px] font-black uppercase tracking-widest text-slate-500">
-                    <span>Relay</span>
+                    <span>Relay Activity</span>
                     <span class="text-emerald-500 text-[8px] animate-pulse uppercase">Active</span>
                 </div>
                 <div class="h-1 bg-slate-900 rounded-full overflow-hidden relative mb-4">
@@ -126,7 +125,7 @@
 
     <footer class="w-full border-t border-white/5 p-8 mt-12 flex flex-col items-center gap-6 bg-slate-900/20 text-center">
         <div class="max-w-3xl glass p-6 rounded-2xl border border-indigo-500/10 text-[11px] text-slate-400 italic leading-relaxed">
-            KMS Node Architecture: Key generation is managed via a distributed Key Management Service (KMS). This architecture ensures that encryption keys are generated in an isolated high-entropy environment and served via secure cloud relays to prevent local side-channel extraction.
+            KMS Node Architecture: Key generation is managed via a distributed Key Management Service (KMS). This architecture ensures that encryption keys are generated in an isolated high-entropy environment to prevent local side-channel extraction.
         </div>
         <div class="space-y-2">
             <p class="text-slate-500 text-[10px] uppercase tracking-[0.4em] font-black">Secure Terminal Distribution</p>
@@ -136,35 +135,36 @@
         </div>
     </footer>
 
-    <div id="manual-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6 bg-slate-950/90 backdrop-blur-xl">
-        <div class="glass w-full max-w-2xl rounded-3xl p-8 space-y-6">
-            <div class="flex justify-between items-center border-b border-white/5 pb-4">
-                <h3 class="text-xl font-black text-indigo-400 uppercase tracking-tight">User Manual</h3>
-                <button onclick="toggleManual()" class="text-slate-500 hover:text-white">✕</button>
+    <div id="manual-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6 bg-slate-950/95 backdrop-blur-xl">
+        <div class="glass w-full max-w-2xl rounded-3xl p-8 space-y-6 shadow-2xl relative">
+            <button onclick="toggleManual()" class="absolute top-6 right-6 text-slate-500 hover:text-white">✕</button>
+            <h3 class="text-2xl font-black text-indigo-400 uppercase tracking-tighter border-b border-white/5 pb-4">System Manual</h3>
+            <div class="space-y-4 text-sm text-slate-400 overflow-y-auto max-h-[50vh] pr-2">
+                <section>
+                    <h4 class="text-white font-bold text-xs uppercase mb-2">01. Identity Configuration</h4>
+                    <p>Initialize your SMTP relay by providing a verified Google App Password to bridge the terminal node.</p>
+                </section>
+                <section>
+                    <h4 class="text-white font-bold text-xs uppercase mb-2">02. Integrity Check</h4>
+                    <p>Before execution, verify the build hash using <span class="mono text-indigo-400">Get-FileHash QuMailSetup.zip</span> in PowerShell.</p>
+                </section>
             </div>
-            <div class="text-sm text-slate-400 space-y-4">
-                <p>1. Download the **QuMailSetup.zip** and extract to your workspace.</p>
-                <p>2. Verify the hash against the official **SHA-256** build integrity fingerprint.</p>
-                <p>3. Initialize the terminal to establish a handshake with the KMS relay.</p>
-            </div>
-            <button onclick="toggleManual()" class="w-full bg-indigo-600 py-4 rounded-2xl font-bold">Close Manual</button>
+            <button onclick="toggleManual()" class="w-full bg-indigo-600 py-4 rounded-2xl font-bold hover:bg-indigo-500 transition-colors">Exit Manual</button>
         </div>
     </div>
 
     <script>
-        function toggleManual() {
-            document.getElementById('manual-modal').classList.toggle('hidden');
-        }
-
+        function toggleManual() { document.getElementById('manual-modal').classList.toggle('hidden'); }
+        
         function copyHash() {
             const h = "9BBA5717A651C00A239B4ACBFB3D3E87D882B41457FF6317BEB36BCA92E9C7F2";
             navigator.clipboard.writeText(h);
             const log = document.getElementById('terminal-log');
             const p = document.createElement('p');
             p.className = "text-indigo-400 font-bold";
-            p.innerText = ">> HASH_COPIED_SUCCESS";
+            p.innerText = ">> HASH_COPIED_TO_CLIPBOARD";
             log.appendChild(p);
-            alert("Official Hash Copied. Use PowerShell to verify your local zip file.");
+            alert("Hash Copied! Verify independently via PowerShell.");
         }
 
         let pkts = 1024;
