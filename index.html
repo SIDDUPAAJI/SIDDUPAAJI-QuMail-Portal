@@ -10,6 +10,8 @@
         body { background-color: #020617; font-family: 'Inter', sans-serif; color: #f8fafc; }
         .mono { font-family: 'JetBrains Mono', monospace; }
         .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 10px; }
         
         @keyframes scan { 0% { top: -100%; } 100% { top: 100%; } }
         .scanner { position: absolute; width: 100%; height: 20%; background: linear-gradient(to bottom, transparent, rgba(99, 102, 241, 0.05), transparent); animation: scan 4s infinite linear; pointer-events: none; }
@@ -40,7 +42,7 @@
                 </div>
 
                 <div class="flex flex-wrap gap-4 items-center">
-                    <a href="https://github.com/SIDDUPAAJI/SIDDUPAAJI-QuMail-Portal/raw/main/QuMailSetup.zip" 
+                    <a href="./QUMAIL.zip" download 
                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-10 py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-3 shadow-2xl shadow-indigo-900/40 hover:-translate-y-1">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         Download App
@@ -50,26 +52,20 @@
                     </button>
                 </div>
 
-                <div class="grid grid-cols-2 gap-8 mt-12 pt-8 border-t border-white/5">
-                    <div>
-                        <p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-black mb-1">Build ID</p>
-                        <p class="mono text-xs text-indigo-300">QMC-2026-PROD</p>
-                    </div>
-                    <div>
-                        <p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-black mb-1">Status</p>
-                        <p class="mono text-xs text-emerald-400 font-bold tracking-widest uppercase">● Verified</p>
-                    </div>
+                <div class="grid grid-cols-2 gap-8 mt-12 pt-8 border-t border-white/5 text-[10px] uppercase font-black tracking-[0.2em] text-slate-500">
+                    <div>Build ID: <span class="text-indigo-300 mono">QMC-2026-PROD</span></div>
+                    <div>Status: <span class="text-emerald-400 mono">Verified</span></div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="glass p-8 rounded-3xl">
                     <h4 class="text-indigo-400 text-[10px] font-black uppercase tracking-widest mb-4">Zero-Knowledge</h4>
-                    <p class="text-sm text-slate-400 leading-relaxed">Keys and payloads remain decoupled to ensure zero exposure during relay.</p>
+                    <p class="text-sm text-slate-400 leading-relaxed">Payloads and keys remain decoupled to ensure zero exposure during relay.</p>
                 </div>
                 <div class="glass p-8 rounded-3xl">
                     <h4 class="text-emerald-400 text-[10px] font-black uppercase tracking-widest mb-4">Ephemeral RAM</h4>
-                    <p class="text-sm text-slate-400 leading-relaxed">Deterministic memory scrubbing overwrites session data immediately.</p>
+                    <p class="text-sm text-slate-400 leading-relaxed">Deterministic memory scrubbing overwrites session data immediately after processing.</p>
                 </div>
             </div>
         </section>
@@ -78,18 +74,18 @@
             <div class="glass rounded-3xl overflow-hidden shadow-xl">
                 <div class="bg-slate-900/50 px-5 py-3 border-b border-white/5 flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-slate-400">
                     <span>Audit Feed</span>
-                    <span class="text-indigo-400 animate-pulse text-[9px]">LIVE MONITORING</span>
+                    <span class="text-indigo-400 animate-pulse text-[9px]">LIVE</span>
                 </div>
                 <div class="p-5 space-y-4">
                     <div class="flex justify-between items-end">
                         <p class="text-[9px] text-slate-500 uppercase font-bold">Entropy</p>
                         <p id="entropy-val" class="text-indigo-400 text-xs font-bold mono">7.8833 b/B</p>
                     </div>
-                    <div class="w-full bg-slate-950 h-1.5 rounded-full overflow-hidden">
+                    <div class="w-full bg-slate-950 h-1 rounded-full overflow-hidden">
                         <div id="entropy-bar" class="bg-indigo-600 h-full w-[94%] transition-all duration-700 relative"></div>
                     </div>
-                    <div id="terminal-log" class="bg-black/40 p-3 rounded-xl border border-white/5 mono text-[9px] min-h-[60px] flex flex-col justify-end">
-                        <p class="text-emerald-500 font-bold">● Connection Secure</p>
+                    <div id="terminal-log" class="bg-black/40 p-3 rounded-xl border border-white/5 mono text-[9px] min-h-[60px] flex flex-col justify-end text-emerald-500">
+                        ● Connection Secure
                     </div>
                 </div>
             </div>
@@ -98,7 +94,6 @@
                 <div class="flex items-center gap-2 mb-4 text-[10px] font-black uppercase tracking-widest text-slate-300">
                     <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Build Integrity
                 </div>
-                <p class="text-[9px] text-slate-500 uppercase font-bold mb-2">SHA-256 Checksum</p>
                 <code class="block bg-black/50 p-4 rounded-xl text-[10px] text-slate-400 break-all mono border border-white/5 mb-4">
                     9BBA5717A651C00A239B4ACBFB3D3E87D882B41457FF6317BEB36BCA92E9C7F2
                 </code>
@@ -109,7 +104,7 @@
 
             <div class="glass rounded-3xl p-6">
                 <div class="flex justify-between items-center mb-4 text-[10px] font-black uppercase tracking-widest text-slate-500">
-                    <span>Relay Activity</span>
+                    <span>Network</span>
                     <span class="text-emerald-500 text-[8px] animate-pulse uppercase">Active</span>
                 </div>
                 <div class="h-1 bg-slate-900 rounded-full overflow-hidden relative mb-4">
@@ -125,48 +120,87 @@
 
     <footer class="w-full border-t border-white/5 p-8 mt-12 flex flex-col items-center gap-6 bg-slate-900/20 text-center">
         <div class="max-w-3xl glass p-6 rounded-2xl border border-indigo-500/10 text-[11px] text-slate-400 italic leading-relaxed">
-            KMS Node Architecture: Key generation is managed via a distributed Key Management Service (KMS). This architecture ensures that encryption keys are generated in an isolated high-entropy environment to prevent local side-channel extraction.
+            KMS Node Architecture: Key generation is managed via a distributed Key Management Service (KMS). This ensures encryption keys are generated in an isolated high-entropy environment to prevent side-channel extraction.
         </div>
-        <div class="space-y-2">
-            <p class="text-slate-500 text-[10px] uppercase tracking-[0.4em] font-black">Secure Terminal Distribution</p>
-            <p class="text-slate-400 text-[11px] mono font-bold uppercase tracking-widest">
-                © 2026 QuMail Protocol &bull; ALL RIGHTS RESERVED
-            </p>
-        </div>
+        <p class="text-slate-400 text-[11px] mono font-bold uppercase tracking-widest">
+            © 2026 QuMail Protocol &bull; ALL RIGHTS RESERVED
+        </p>
     </footer>
 
-    <div id="manual-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6 bg-slate-950/95 backdrop-blur-xl">
-        <div class="glass w-full max-w-2xl rounded-3xl p-8 space-y-6 shadow-2xl relative">
-            <button onclick="toggleManual()" class="absolute top-6 right-6 text-slate-500 hover:text-white">✕</button>
-            <h3 class="text-2xl font-black text-indigo-400 uppercase tracking-tighter border-b border-white/5 pb-4">System Manual</h3>
-            <div class="space-y-4 text-sm text-slate-400 overflow-y-auto max-h-[50vh] pr-2">
+    <div id="manual-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6 bg-slate-950/95 backdrop-blur-2xl">
+        <div class="glass w-full max-w-3xl rounded-3xl p-8 border border-white/10 shadow-2xl relative flex flex-col max-h-[90vh]">
+            <button onclick="toggleManual()" class="absolute top-6 right-6 text-slate-500 hover:text-white text-xl">✕</button>
+            
+            <div class="border-b border-white/5 pb-4 mb-6">
+                <h3 class="text-2xl font-black text-indigo-400 uppercase tracking-tighter">System Manual & Security Protocol</h3>
+                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Follow these steps to initialize QuMail</p>
+            </div>
+
+            <div class="space-y-8 text-sm text-slate-400 overflow-y-auto custom-scrollbar pr-4 pb-6">
                 <section>
-                    <h4 class="text-white font-bold text-xs uppercase mb-2">01. Identity Configuration</h4>
-                    <p>Initialize your SMTP relay by providing a verified Google App Password to bridge the terminal node.</p>
+                    <h4 class="text-white font-bold uppercase text-xs mb-3 flex items-center gap-2">
+                        <span class="w-5 h-5 rounded bg-indigo-600 flex items-center justify-center text-[10px]">1</span>
+                        Generate App Password
+                    </h4>
+                    <p class="mb-2">Go to your **Google Account Settings** > **Security**.</p>
+                    <p class="mb-2">Search for **"App Passwords"** (Ensure 2-Step Verification is ON).</p>
+                    <p>Select **"Mail"** and **"Other (Custom Name)"**, name it 'QuMail', and copy the **16-character code** provided.</p>
                 </section>
+
                 <section>
-                    <h4 class="text-white font-bold text-xs uppercase mb-2">02. Integrity Check</h4>
-                    <p>Before execution, verify the build hash using <span class="mono text-indigo-400">Get-FileHash QuMailSetup.zip</span> in PowerShell.</p>
+                    <h4 class="text-white font-bold uppercase text-xs mb-3 flex items-center gap-2">
+                        <span class="w-5 h-5 rounded bg-indigo-600 flex items-center justify-center text-[10px]">2</span>
+                        Terminal Configuration
+                    </h4>
+                    <p>Launch `QuMail.exe`. Navigate to **Key Configuration** in the left sidebar.</p>
+                    <p>Enter your **Gmail ID** and paste the **16-character App Password** you just generated.</p>
+                </section>
+
+                <section>
+                    <h4 class="text-white font-bold uppercase text-xs mb-3 flex items-center gap-2">
+                        <span class="w-5 h-5 rounded bg-indigo-600 flex items-center justify-center text-[10px]">3</span>
+                        Understanding Security Levels
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px] mb-4">
+                        <div class="p-3 bg-white/5 rounded-lg border border-white/5">
+                            <p class="text-indigo-400 font-bold mb-1">Level 1: KMS OTP</p>
+                            <p>Information-theoretic security. Uses unique cloud entropy for every character.</p>
+                        </div>
+                        <div class="p-3 bg-white/5 rounded-lg border border-white/5">
+                            <p class="text-indigo-400 font-bold mb-1">Level 2: Quantum AES-256</p>
+                            <p>High-speed symmetric encryption using quantum-derived keys.</p>
+                        </div>
+                        <div class="p-3 bg-white/5 rounded-lg border border-white/5">
+                            <p class="text-indigo-400 font-bold mb-1">Level 3: PQC Hybrid</p>
+                            <p>Post-Quantum Cryptography mixed with AES-256 for future-proof security.</p>
+                        </div>
+                        <div class="p-3 bg-white/5 rounded-lg border border-white/5">
+                            <p class="text-indigo-400 font-bold mb-1">Level 4: Sentinel OTP</p>
+                            <p>Maximum protection. Distributed entropy verified by local Sentinel Auditors.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h4 class="text-white font-bold uppercase text-xs mb-3 flex items-center gap-2">
+                        <span class="w-5 h-5 rounded bg-indigo-600 flex items-center justify-center text-[10px]">4</span>
+                        Sending & Decrypting
+                    </h4>
+                    <p class="mb-2">**To Send:** Go to 'Secure Compose', enter Recipient, select Security Level, and hit 'Send Encrypted'.</p>
+                    <p>**To Decrypt:** Copy the received cipher-block from your inbox, paste it into the 'Decrypt' field, and the system will fetch the matching KMS key for local restoration.</p>
                 </section>
             </div>
-            <button onclick="toggleManual()" class="w-full bg-indigo-600 py-4 rounded-2xl font-bold hover:bg-indigo-500 transition-colors">Exit Manual</button>
+            
+            <button onclick="toggleManual()" class="w-full mt-4 bg-indigo-600 hover:bg-indigo-500 py-4 rounded-2xl font-bold transition-colors">Exit Manual</button>
         </div>
     </div>
 
     <script>
         function toggleManual() { document.getElementById('manual-modal').classList.toggle('hidden'); }
-        
         function copyHash() {
-            const h = "9BBA5717A651C00A239B4ACBFB3D3E87D882B41457FF6317BEB36BCA92E9C7F2";
-            navigator.clipboard.writeText(h);
-            const log = document.getElementById('terminal-log');
-            const p = document.createElement('p');
-            p.className = "text-indigo-400 font-bold";
-            p.innerText = ">> HASH_COPIED_TO_CLIPBOARD";
-            log.appendChild(p);
-            alert("Hash Copied! Verify independently via PowerShell.");
+            navigator.clipboard.writeText("9BBA5717A651C00A239B4ACBFB3D3E87D882B41457FF6317BEB36BCA92E9C7F2");
+            alert("Official Hash Copied.");
         }
-
         let pkts = 1024;
         setInterval(() => {
             document.getElementById('entropy-val').innerText = (7.88 + Math.random() * 0.009).toFixed(4) + " b/B";
